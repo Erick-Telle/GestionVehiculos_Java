@@ -7,6 +7,7 @@ public class SistemaVehiculos {
         Vehiculo bici = new Bicicleta("Trek", "Mountain", 2022, 21);
         Vehiculo moto = new Motocicleta("Honda", "CBR500R", 2021, 500, 10.0);
 
+        Vehiculo[] vehiculos =  {auto, bici, moto};
         // Probar polimorfismo
         auto.mover();
         System.out.println(auto.obtenerDetalles());
@@ -26,7 +27,22 @@ public class SistemaVehiculos {
         System.out.println("La bicicleta " + bici.marca + " " + bici.modelo + " no requiere mantenimiento especializado.");
         ((Combustible) moto).realizarMantenimiento();
 
+        procesarVehiculos(vehiculos);
     }
+    public static void procesarVehiculos(Vehiculo[] vehiculos) {
+        for (Vehiculo v : vehiculos) {
+            v.mover();
+            System.out.println(v.obtenerDetalles());
+            if (v instanceof Combustible) {
+                Combustible c = (Combustible) v;
+                System.out.println("Nivel de combustible antes de recargar: " + c.obtenerNivelCombustible() + " litros");
+                c.recargarCombustible();
+                System.out.println("Nivel de combustible después de recargar: " + c.obtenerNivelCombustible() + " litros");
+            }
+            System.out.println(); // Línea en blanco para separar la salida de cada vehículo
+        }
+    }
+
 }
 
 
